@@ -12,8 +12,8 @@
 class GreythrSwipe < Formula
   desc "Menu bar app that signs you in and out of greytHR on a schedule"
   homepage "https://github.com/direwolfv/greythr-swipe"
-  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "7ed47bf63c21363ce089b079ea9ee4b11c0c1e71526c4d95e3f87ee2ee61126b"
+  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "3340a6c78cc6649075ab97348c335452905fedcd0c6910c7cbec9714cc29fac8"
   license "ISC"
 
   # build.sh compiles App.swift with swiftc; node runs the devDependency prune.
@@ -43,8 +43,9 @@ class GreythrSwipe < Formula
   end
 
   # The symlink is manual because Homebrew sandboxes post-install: a formula cannot write
-  # outside its own prefix (verified — File.symlink raises EPERM there). Only a cask can
-  # place an app in /Applications, and a cask needs a paid Developer ID to clear Gatekeeper.
+  # outside its own prefix (verified — File.symlink raises EPERM there). It is also required,
+  # not cosmetic: SMAppService registers the timer only for an app reachable under
+  # /Applications, and reports .notFound anywhere else.
   def caveats
     <<~EOS
       Link it into /Applications and launch it:
