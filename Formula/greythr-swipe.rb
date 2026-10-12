@@ -12,28 +12,24 @@
 class GreythrSwipe < Formula
   desc "Menu bar app that signs you in and out of greytHR on a schedule"
   homepage "https://github.com/direwolfv/greythr-swipe"
-  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.1.0.tar.gz"
-  sha256 "3340a6c78cc6649075ab97348c335452905fedcd0c6910c7cbec9714cc29fac8"
+  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.2.1.tar.gz"
+  sha256 "b5031c30e21ad5e223d8058563ad22e35d9191b574fb35742768653436972302"
   license "ISC"
 
-  # build.sh compiles App.swift with swiftc; node runs the devDependency prune.
+  # build.sh compiles App.swift with swiftc. No node dependency: Homebrew's node pulls 16
+  # libraries of its own, and run.sh finds the user's node at run time.
   depends_on xcode: :build
   depends_on :macos
-  depends_on "node"
+
+  # The only runtime dependency, fetched straight from the registry so the build needs no npm.
+  # playwright-core has no dependencies of its own. Keep in step with package-lock.json.
+  resource "playwright-core" do
+    url "https://registry.npmjs.org/playwright-core/-/playwright-core-1.63.0.tgz"
+    sha256 "208593d4e1bcd8f8fe5f869cad1cc332dc7f1d70dc1d58c102dc3ac36e30f26c"
+  end
 
   def install
-    # Belt and braces: the dependency is playwright-core, which has no browser-download
-    # step at all, and this env var stops any transitive one too.
-    ENV["PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD"] = "1"
-
-    # Use the dependency's own npm rather than whatever PATH offers, and say so plainly if
-    # it is missing — `npm ci` on its own would just exit 127. build.sh needs node too, so
-    # put the dependency first on PATH for it.
-    node_bin = formula_opt_bin("node")
-    odie "node dependency is missing: #{node_bin}/npm not found" unless (node_bin/"npm").exist?
-    ENV.prepend_path "PATH", node_bin
-
-    system node_bin/"npm", "ci", "--omit=dev"
+    resource("playwright-core").stage(buildpath/"node_modules/playwright-core")
     system "./app/build.sh", "--no-migrate"
     prefix.install "app/greytHR.app"
 
