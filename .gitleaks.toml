@@ -1,0 +1,15 @@
+# gitleaks config for a public repo: the default ruleset plus the personal data it misses.
+# Run: gitleaks dir .  (working tree)  /  gitleaks git .  (history)
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "home-path"
+description = "A real home directory — use ~ instead"
+regex = '''/Users/[A-Za-z0-9._-]+/'''
+tags = ["pii"]
+
+  [[rules.allowlists]]
+  description = "Placeholder and system users"
+  regexes = ['''/Users/(you|yourname|username|Shared)/''']
