@@ -12,8 +12,8 @@
 class GreythrSwipe < Formula
   desc "Menu bar app that signs you in and out of greytHR on a schedule"
   homepage "https://github.com/direwolfv/greythr-swipe"
-  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.2.2.tar.gz"
-  sha256 "a34e648645e18d9b999387306d4fcc4c2bf2539ad02665c8e218b9eb89453214"
+  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.3.0.tar.gz"
+  sha256 "4b074f6ebb5d4edc707d5f16d5bf4c5f1c082b5fb241592915213c1508b31157"
   license "ISC"
 
   # build.sh compiles App.swift with swiftc. No node dependency: Homebrew's node pulls 16
@@ -44,6 +44,8 @@ class GreythrSwipe < Formula
   # /Applications, and reports .notFound anywhere else.
   def caveats
     <<~EOS
+      Needs Node 24.22.1 or newer (nvm, Homebrew or nodejs.org); older ones are skipped.
+
       Link it into /Applications and launch it:
         ln -sfn #{opt_prefix}/greytHR.app /Applications/greytHR.app
         open /Applications/greytHR.app
