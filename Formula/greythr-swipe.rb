@@ -12,8 +12,8 @@
 class GreythrSwipe < Formula
   desc "Menu bar app that signs you in and out of greytHR on a schedule"
   homepage "https://github.com/direwolfv/greythr-swipe"
-  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.4.0.tar.gz"
-  sha256 "10924c7d727d63523c8fc6140b9c94da20f51cdf7d6a894241c5eb3d8c9d8d72"
+  url "https://github.com/direwolfv/greythr-swipe/archive/refs/tags/v1.4.1.tar.gz"
+  sha256 "edf3797b462d1e67e97e4ecd2c1f01ae0c40d732be5d1f322373ed8f7f2bbdd5"
   license "ISC"
 
   # build.sh compiles App.swift with swiftc. No node dependency: Homebrew's node pulls 16
