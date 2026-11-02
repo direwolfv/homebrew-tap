@@ -10,6 +10,7 @@ brew install direwolfv/tap/<formula>
 | Formula | What it is |
 |---|---|
 | [greythr-swipe](https://github.com/direwolfv/greythr-swipe) | Menu bar app that signs you in and out of greytHR on a schedule |
+| [homebrew-manager](https://github.com/direwolfv/homebrew-manager) | Native macOS app to browse, upgrade and uninstall your Homebrew packages |
 
 Each formula builds from source, so nothing here needs a paid Developer ID and
 nothing gets quarantined by Gatekeeper.
